@@ -19,26 +19,44 @@ async function actualizarViento(spotKey) {
 
   try {
     const respuesta = await fetch(url);
-    if (!respuesta.ok) throw new Error("Fallo de red");
+    if (!respuesta.ok) throw new Error("Fallo en la consulta de red");
     const datos = await respuesta.json();
     
-    if (!datos.current) throw new Error("Datos incompletos");
+    if (!datos.current || datos.current.wind_speed_10m === undefined) {
+      throw new Error("Datos incompletos");
+    }
 
     const velocidad = Math.round(datos.current.wind_speed_10m);
     let grados = datos.current.wind_direction_10m;
     
+    // Conversión de grados a direcciones cardinales
     const direcciones = ["N", "NE", "E", "SE", "S", "SO", "W", "NW"];
     grados = ((grados % 360) + 360) % 360;
     const indice = Math.round(grados / 45) % 8;
-    
-    let estadoKite = velocidad >= 15 ? "• 🏄‍♂️ ÓPTIMO" : (velocidad >= 10 ? "• 🛹 FOIL" : "• ☕ MODO CAFÉ");
-    reporteDiv.innerText = `${velocidad} KNTS • DIRECCIÓN: ${direcciones[indice]} ${estadoKite}`;
-  } catch (e) {
+    const direccionText = direcciones[indice];
+
+    // Asignación de estados dinámicos
+    let estadoKite = "";
+    if (velocidad >= 15) {
+      estadoKite = "• 🏄‍♂️ ÓPTIMO";
+    } else if (velocidad >= 10 && velocidad < 15) {
+      estadoKite = "• 🛹 FOIL";
+    } else {
+      estadoKite = "• ☕ MODO CAFÉ";
+    }
+
+    reporteDiv.innerText = `${velocidad} KNTS • DIRECCIÓN: ${direccionText} ${estadoKite}`;
+
+  } catch (error) {
+    console.error("Error original:", error);
     reporteDiv.innerText = "❌ ERROR AL LEER EL ANEMÓMETRO";
   }
 }
 
-// Vinculación global segura en modo modular externo
-window.onload = () => {
+// Hacemos que la función sea visible globalmente para el entorno del HTML
+window.actualizarViento = actualizarViento;
+
+// Carga inicial segura del primer spot por defecto
+window.addEventListener("load", () => {
   actualizarViento('medano');
-};
+});
