@@ -1,0 +1,194 @@
+/* variables de diseño: Negro absoluto, gris Apple y blanco roto */
+:root {
+  --bg-color: #0A0A0A;       /* Fondo negro profundo */
+  --text-main: #F5F5F7;      /* Blanco suave (estilo San Francisco/Apple) */
+  --text-muted: #86868B;     /* Gris para subtítulos y metadatos */
+  --border-color: #262626;   /* Líneas hiperfinas de separación */
+  --font-serif: "Times New Roman", Times, Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Cabecera estilo cabecera de periódico o revista de diseño */
+header {
+  text-align: center;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 24px;
+}
+
+header h1 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+header p {
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.lunar-widget {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.weather-station {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+#spot-selector {
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+  margin-bottom: 6px;
+  outline: none;
+}
+
+#spot-selector option {
+  background-color: #121212;
+  color: var(--text-main);
+}
+
+#viento-reporte {
+  color: #00E5FF; /* Un azul cian eléctrico muy fino para el dato del viento */
+  font-weight: 500;
+}
+
+
+/* Bloques de historias */
+.journal-entry {
+  margin-bottom: 56px;
+}
+
+/* Contenedor de la foto: Relación de aspecto fija para evitar saltos de layout */
+.image-container {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: #141414;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.meta-data {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.entry-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  color: #FFFFFF;
+}
+
+.entry-text {
+  font-size: 0.95rem;
+  color: #E2E2E5;
+  text-align: justify;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+/* Tabla técnica en CSS Grid */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 0;
+  text-align: center;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-item:not(:last-child) {
+  border-right: 1px solid var(--border-color);
+}
+
+.grid-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.grid-value {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-main);
+}
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.instagram-link {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.instagram-link:hover {
+  color: var(--text-muted);
+}
